@@ -1,20 +1,28 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MessageService} from "./message.service";
 import {Message} from './message.model';
-import {NgForm} from '@angular/forms';
+import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-message-input',
     templateUrl: './message-input.component.html'
 })
-export class MessageInputComponent {
+export class MessageInputComponent implements OnInit{
+
+    messageForm: FormGroup;
 
     constructor(private messageService: MessageService){}
 
-    onSubmit(form: NgForm){
-        const message = new Message(form.value.content, "Moi");
+    ngOnInit() {
+        this.messageForm = new FormGroup({
+            content: new FormControl(null, Validators.required)
+        });
+    }
+
+    onSubmit(){
+        const message = new Message(this.messageForm.value.content, "Moi");
         this.messageService.addMessage(message);
-        form.resetForm();
+        this.messageForm.reset();
     }
 
 }
