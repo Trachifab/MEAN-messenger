@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Message = require('../models/message');
+var Message = require('../bin/models/message');
 
 router.post('/', function (req, res, next) {
     var message = new Message({

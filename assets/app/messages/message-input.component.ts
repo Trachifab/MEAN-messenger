@@ -21,7 +21,11 @@ export class MessageInputComponent implements OnInit{
 
     onSubmit(){
         const message = new Message(this.messageForm.value.content, "Moi");
-        this.messageService.addMessage(message);
+        this.messageService.addMessage(message)
+            .subscribe(
+                data => console.log(data),
+                error => console.log(error)
+            );
         this.messageForm.reset();
     }
 
