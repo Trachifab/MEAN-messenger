@@ -12,6 +12,8 @@ import { MessagesComponent } from "./messages/messages.component";
 import {AuthentificationComponent} from "./auth/authentification.component";
 import {HeaderComponent} from "./header/header.component";
 
+import {routing} from "./app.routing";
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -22,7 +24,7 @@ import {HeaderComponent} from "./header/header.component";
         AuthentificationComponent,
         HeaderComponent
     ],
-    imports: [BrowserModule, FormsModule],
+    imports: [BrowserModule, FormsModule, routing],
     bootstrap: [AppComponent]
 })
 export class AppModule {
