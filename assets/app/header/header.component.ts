@@ -6,13 +6,13 @@ import {Component} from '@angular/core';
         <header>
             <nav class="col-md-8 col-md-offset-2">
                 <ul class="nav nav-pills">
-                    <li>
-                        <a>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/messages']">
                             Messenger
                         </a>
                     </li>
-                    <li>
-                        <a>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/auth']">
                             Authentification
                         </a>
                     </li>
