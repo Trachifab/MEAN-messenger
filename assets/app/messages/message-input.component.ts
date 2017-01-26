@@ -10,6 +10,7 @@ import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
 export class MessageInputComponent implements OnInit{
 
     messageForm: FormGroup;
+    message: Message;
 
     constructor(private messageService: MessageService){}
 
@@ -17,15 +18,35 @@ export class MessageInputComponent implements OnInit{
         this.messageForm = new FormGroup({
             content: new FormControl(null, Validators.required)
         });
+
+        this.messageService.messageIsEdit.subscribe(
+            (message: Message) => this.message = message
+        );
+    }
+
+    onClear() {
+        this.message = null;
+        this.messageForm.reset();
     }
 
     onSubmit(){
-        const message = new Message(this.messageForm.value.content, "Moi");
-        this.messageService.addMessage(message)
+        if(this.message){
+            //EDIT
+            this.message.content = this.messageForm.value.content;
+            this.messageService.updateMessage(this.message)
+                .subscribe(
+
+                );
+            this.message = null;
+        } else {
+            //CREATE
+            const message = new Message(this.messageForm.value.content, "Moi");
+            this.messageService.addMessage(message)
             .subscribe(
                 data => console.log(data),
                 error => console.log(error)
             );
+        }
         this.messageForm.reset();
     }
 

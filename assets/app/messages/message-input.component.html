@@ -6,8 +6,12 @@
                 type="text" 
                 id="content" 
                 class="form-control"
-                formControlName="content">
+                formControlName="content"
+                [ngModel]="message?.content">
         </div>
+        <button type="button" class="btn btn-danger" (click)="onClear()">    
+            Clear
+        </button>
         <button class="btn btn-primary" [disabled]="!messageForm.valid" type="submit">
             Save
         </button>
