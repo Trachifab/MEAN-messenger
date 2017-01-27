@@ -18,6 +18,8 @@ import {SignupComponent} from "./auth/signup.component";
 
 import {HttpModule} from "@angular/http";
 
+import {AuthService} from './auth/auth.service';
+
 import {routing} from "./app.routing";
 
 @NgModule({
@@ -34,6 +36,7 @@ import {routing} from "./app.routing";
         SignupComponent
     ],
     imports: [BrowserModule, FormsModule, routing, ReactiveFormsModule, HttpModule],
+    providers: [AuthService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
