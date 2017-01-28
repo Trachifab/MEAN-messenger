@@ -4,11 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from "./app.component";
 
-import { MessageComponent } from "./messages/message.component";
-import { MessageListComponent } from "./messages/message-list.component";
-import { MessageInputComponent } from "./messages/message-input.component";
-import { MessagesComponent } from "./messages/messages.component";
-
 import {AuthentificationComponent} from "./auth/authentification.component";
 import {HeaderComponent} from "./header/header.component";
 
@@ -25,13 +20,11 @@ import {ErrorService} from './errors/error.service';
 
 import {routing} from "./app.routing";
 
+import { MessageModule} from "./messages/message.module";
+
 @NgModule({
     declarations: [
         AppComponent,
-        MessageComponent,
-        MessageListComponent,
-        MessageInputComponent,
-        MessagesComponent,
         AuthentificationComponent,
         HeaderComponent,
         LogoutComponent,
@@ -39,7 +32,13 @@ import {routing} from "./app.routing";
         SignupComponent,
         ErrorComponent
     ],
-    imports: [BrowserModule, FormsModule, routing, ReactiveFormsModule, HttpModule],
+    imports: [
+        BrowserModule, 
+        routing, 
+        ReactiveFormsModule, 
+        HttpModule,
+        MessageModule
+    ],
     providers: [AuthService, ErrorService],
     bootstrap: [AppComponent]
 })
