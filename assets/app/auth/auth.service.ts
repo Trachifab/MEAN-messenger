@@ -5,10 +5,12 @@ import 'rxjs/Rx';
 
 import {User} from './user.model';
 
+import {ErrorService} from "../errors/error.service";
+
 @Injectable()
 export class AuthService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http, private errorService: ErrorService) {}
 
     signup(user: User) {
         const body = JSON.stringify(user);
@@ -17,7 +19,10 @@ export class AuthService {
         });
         return this.http.post('http://localhost:3000/user', body, {headers: headers})
             .map((res) => res.json())
-            .catch((error) => Observable.throw(error.json()));  
+            .catch((error) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            }); 
     }
 
     signin(user: User) {
@@ -27,7 +32,10 @@ export class AuthService {
         });
         return this.http.post('http://localhost:3000/user/signin', body, {headers: headers})
             .map((res) => res.json())
-            .catch((error) => Observable.throw(error.json()));  
+            .catch((error) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });  
     }
 
     logout() {
